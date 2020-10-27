@@ -1,0 +1,38 @@
+1º paso crear person a partir de student_first
+
+CREATE TABLE person as 
+SELECT `name`,`surname`,`email`,`birthdate`,`postalCode`, 1 FROM `student_first` WHERE 1
+
+
+2º añadimos una numeración de persona
+
+ALTER TABLE `person` ADD `idPerson` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`idPerson`);
+
+3º añadimos segundo a person
+ 
+INSERT INTO `person`(`name`, `surname`, `email`, `birthdate`, `postalCode`, `1`) 
+     SELECT `name`,`surname`,`email`,`birthdate`,`postalCode`,2 FROM `student_second` WHERE 1
+
+4º añadimos profe a person
+
+INSERT INTO `person`(`name`, `surname`, `email`, `birthdate`, `postalCode`, `1`)
+SELECT `name`, `surname`, `email`, `birthdate`, `postalCode`, 5 FROM `teacher` WHERE 1
+
+5º Crear la tabla student a partir de person
+
+create table student as SELECT `idPerson`,`curso` FROM `person` WHERE curso < 3
+
+Ya puedo eliminar las tablas student_first, student_second.
+En la tabla student renombrar la column IdPerson por idStudent y hacerla clave.
+
+
+6º Crear la tabla teacher a partir de person
+
+create table teacher2 as SELECT `idPerson` FROM `person` WHERE curso = 5
+
+  OJO la tabla teacher  ya existe elimino teacher y renombro		
+
+
+7º Elimino la columna curso de person 
+
+8º Relacionamos Tablas
